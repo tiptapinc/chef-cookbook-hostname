@@ -28,12 +28,13 @@ fqdn = node['set_fqdn']
 if fqdn
   fqdn = fqdn.sub('*', node.name)
 
-  hostname = if node['name_as_hostname']
-    node.name
-  else
-    fqdn =~ /^([^.]+)/
-    $1
-  end
+  hostname = node.name
+  # if node['name_as_hostname']
+  #   node.name
+  # else
+  #   fqdn =~ /^([^.]+)/
+  #   $1
+  # end
 
   file '/etc/hostname' do
     content "#{hostname}\n"
